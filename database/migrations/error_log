@@ -1,0 +1,4 @@
+[22-Apr-2025 13:03:10 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Database\Migrations\Migration" not found in /home/accessimate/api-dev.accessimate.com/database/migrations/2025_04_22_130148_add_color_to_compliances_table.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/accessimate/api-dev.accessimate.com/database/migrations/2025_04_22_130148_add_color_to_compliances_table.php on line 7

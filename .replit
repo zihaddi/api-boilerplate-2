@@ -1,0 +1,56 @@
+modules = ["php-8.2", "nodejs-20", "web"]
+[agent]
+expertMode = true
+
+[nix]
+channel = "stable-25_05"
+
+[userenv]
+
+[userenv.shared]
+DB_CONNECTION = "sqlite"
+APP_ENV = "local"
+APP_DEBUG = "true"
+LOG_CHANNEL = "stack"
+LOG_STACK = "single"
+QUEUE_CONNECTION = "database"
+CACHE_STORE = "file"
+SESSION_DRIVER = "file"
+FILESYSTEM_DISK = "public"
+MAIL_MAILER = "log"
+BROADCAST_CONNECTION = "log"
+GEOIP_ENABLED = "false"
+APP_LOCALE = "en"
+APP_FALLBACK_LOCALE = "en"
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Start application"
+
+[[workflows.workflow]]
+name = "Start application"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npx concurrently -c \"#93c5fd,#c4b5fd\" \"php artisan serve --host=0.0.0.0 --port=5000\" \"npm run dev\" --names=laravel,vite"
+waitForPort = 5000
+
+[workflows.workflow.metadata]
+outputType = "webview"
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
+[[ports]]
+localPort = 5173
+externalPort = 5173
